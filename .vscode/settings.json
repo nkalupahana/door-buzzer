@@ -5,5 +5,8 @@
     "--background-index",
     "--query-driver=**",
     "--compile-commands-dir=/Users/nisala/Projects/door-buzzer/build"
-  ]
+  ],
+  "idf.currentSetup": "/Users/nisala/esp/v5.5.1/esp-idf",
+  "idf.port": "/dev/tty.usbserial-0001",
+  "idf.flashType": "UART"
 }
