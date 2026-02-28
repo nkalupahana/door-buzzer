@@ -2,13 +2,21 @@
 #include <Arduino.h>
 #include <climits>
 
+// Check the door switches on the following pins.
 const uint8_t CHECK_PINS[] = {23};
+// If any door becomes open, buzz the buzzer on the following pin.
 const uint8_t BUZZER_PIN = 21;
-const int BUZZER_EVERY_MS = 30000;    // 30 seconds
-const int BUZZER_FREQ = 440;          // A4
-const uint8_t BUZZ_TIMES = 3;         // buzz 3 times per buzz
-const uint MAX_BUZZER_ITERATIONS = 5; // after this many times, buzz forever
-const uint BUZZER_DURATION_MS = 500;  // duration of each buzz
+// Buzz the buzzer every X milliseconds,
+const int BUZZER_EVERY_MS = 30000; // 30 seconds
+// at this frequency,
+const int BUZZER_FREQ = 440; // A4
+// this many times.
+const uint8_t BUZZ_TIMES = 3; // buzz 3 times per buzz
+// After repeating the sequence this many times, buzz continuously.
+const uint MAX_BUZZER_ITERATIONS = 5;
+//
+// The duration of each individual buzz.
+const uint BUZZER_DURATION_MS = 500;
 
 const int CLOSED = -1;
 int lastOpenTime = CLOSED;
