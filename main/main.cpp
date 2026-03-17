@@ -1,9 +1,10 @@
 #include "esp32-hal.h"
+#include "esp_log_level.h"
 #include <Arduino.h>
 #include <climits>
 
 // Check the door switches on the following pins.
-const uint8_t CHECK_PINS[] = {23};
+const uint8_t CHECK_PINS[] = {22, 23};
 // If any door becomes open, buzz the buzzer on the following pin.
 const uint8_t BUZZER_PIN = 21;
 // Buzz the buzzer every X milliseconds,
@@ -17,6 +18,7 @@ const uint MAX_BUZZER_ITERATIONS = 5;
 //
 // The duration of each individual buzz.
 const uint BUZZER_DURATION_MS = 500;
+const char *TAG = "Buzzer";
 
 const int CLOSED = -1;
 int lastOpenTime = CLOSED;
@@ -38,11 +40,13 @@ void buzz() {
 
 void setup() {
   Serial.begin(115200);
-  Serial.println("Hello, World!");
 
   for (uint8_t pin : CHECK_PINS) {
     pinMode(pin, INPUT_PULLUP);
   }
+
+  esp_log_level_set(TAG, ESP_LOG_INFO);
+  ESP_LOGI(TAG, "Setup complete");
 }
 
 void loop() {
@@ -50,6 +54,7 @@ void loop() {
   for (uint8_t pin : CHECK_PINS) {
     if (digitalRead(pin) == HIGH) {
       open = true;
+      ESP_LOGV("Door", "Door open");
     }
   }
 
@@ -65,4 +70,6 @@ void loop() {
   } else {
     resetBuzzer();
   }
+
+  delay(100);
 }
